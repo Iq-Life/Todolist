@@ -1,0 +1,39 @@
+.Todo {
+    border: #61dafb 2px solid;
+    background-color: #282c34;
+    border-radius: 5px;
+    padding: 0 10px 5px 10px;
+    margin: 5px 10px;
+}
+.input {
+    background-color: #ddddff;
+    padding: 2px;
+    margin: 0 3px;
+    border-radius: 5px;
+    border: double 3px;
+}
+.but_add {
+
+}
+.but_del {
+    background-color: Gray;
+    padding: 0;
+    text-align: center;
+    margin-left: 10px;
+    font-size: x-small;
+}
+.ul_span {
+    color: #8585d7;
+    /*Стиль текста*/
+    font-style: oblique;
+    margin-left: 5px;
+    font-size: medium;
+}
+.ul {
+    text-align: left;
+    color: black;
+    /*Универсальное свойство, позволяющее одновременно задать стиль маркера,
+    его положение, а также изображение, которое будет использоваться в качестве маркера .
+    Для подробного ознакомления смотрите информацию о каждом свойстве list-style-type,
+    list-style-position и list-style-image отдельно.*/
+}
