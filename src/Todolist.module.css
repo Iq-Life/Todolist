@@ -12,6 +12,13 @@
     border-radius: 5px;
     border: double 3px;
 }
+.error {
+    background-color: #ddddff;
+    padding: 2px;
+    margin: 0 3px;
+    border-radius: 5px;
+    border: double 3px red;
+}
 .but_add {
 
 }

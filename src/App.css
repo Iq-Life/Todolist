@@ -1,7 +1,6 @@
 .App {
     text-align: center;
 }
-
 .App-header {
     background-color: DimGray;
     min-height: 100vh;
@@ -10,6 +9,12 @@
     justify-content: center;
     font-size: calc(3px + 2vmin);
     color: #61dafb;
+}
+.error {
+    border: red 1px solid;
+}
+.error-message {
+    color: red;
 }
 
 
