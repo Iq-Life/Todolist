@@ -3,14 +3,6 @@ import './App.css';
 import {TaskType, Todolist} from "./Todolist";
 import {v1} from "uuid";
 
-export type PropsType = {
-    title: string
-    tasks: Array<TaskType>
-    removeTasks: (id: string) => void
-    changeFilter: (value: FilterValueType) => void
-    addTask : ()=>void
-}
-
 export type FilterValueType = "all"|"active"|"completed"
 
 function App() {
@@ -32,8 +24,8 @@ function App() {
         setFilter(value)
     }
 
-    function addTasks () {
-        let task = {id: v1(), title: "New task", isDone: false};
+    function addTasks (title:string) {
+        let task = {id: v1(), title: title, isDone: false};
         let newTasks = [task, ...tasks];
         setTasks(newTasks);
     }
