@@ -52,6 +52,7 @@ function App() {
                         removeTasks={removeTasks}
                         changeFilter={changeFilter}
                         changeStatus={changeStatusTask}
+                        colorFilter={filter}
                     />
                 </div>
             </header>
