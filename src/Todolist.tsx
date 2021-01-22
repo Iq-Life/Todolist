@@ -11,10 +11,11 @@ export type PropsType = {
     title: string
     tasks: Array<TaskType>
     removeTasks: (id: string) => void
-    changeFilter: (value: FilterValueType) => void
+    changeFilter: (value: FilterValueType, todoListId: string) => void
     addTask: (title: string) => void
     changeStatus: (id: string, isDone: boolean) => void
     colorFilter:FilterValueType
+    id:string
 }
 
 export function Todolist(props: PropsType) {
@@ -38,9 +39,9 @@ export function Todolist(props: PropsType) {
             addTask()
         }
     }
-    const changeFilterAll = () => props.changeFilter("all")
-    const changeFilterActive = () => props.changeFilter("active")
-    const changeFilterCompleted = () => props.changeFilter("completed")
+    const changeFilterAll = () => props.changeFilter("all", props.id)
+    const changeFilterActive = () => props.changeFilter("active", props.id)
+    const changeFilterCompleted = () => props.changeFilter("completed", props.id)
     return (
         <div className={s.Todo}>
             <h3>{props.title}</h3>
@@ -50,7 +51,7 @@ export function Todolist(props: PropsType) {
                        onChange={onChange}
                        onKeyPress={onKeyPress}/>
                 <button className={s.but_add} onClick={addTask}>add</button>
-                { error && <div className="error-message" >{error}</div>}
+                { error && <div className="error-message" >{error}</div> }
             </div>
             <ul className={s.ul}>
                 {props.tasks.map(t => {
@@ -61,7 +62,7 @@ export function Todolist(props: PropsType) {
                         let newIsDoneValue = e.currentTarget.checked;
                         props.changeStatus(t.id, newIsDoneValue)
                     }
-                    return <li key={t.id}>
+                    return <li key={t.id} className={t.isDone ? s.is_done : ""}>
                         <input type="checkbox" checked={t.isDone} onChange={onChangeChangeH}/>
                         <span className={s.ul_span}>{t.title}</span>
                         <button className={s.but_del} onClick={onClickHandler}>]X[</button>

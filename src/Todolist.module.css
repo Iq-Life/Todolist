@@ -47,3 +47,6 @@
     Для подробного ознакомления смотрите информацию о каждом свойстве list-style-type,
     list-style-position и list-style-image отдельно.*/
 }
+.is_done{
+    opacity: 0.5;
+}

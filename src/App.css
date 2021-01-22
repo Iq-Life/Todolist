@@ -18,5 +18,9 @@
 }
 .active-filter {
     background-color: #8585d7;
+
+}
+.is-done {
+    opacity: 0.5;
 }
 
