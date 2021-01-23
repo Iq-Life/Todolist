@@ -42,7 +42,7 @@ function App() {
             {id: v1(), title: "Milk", isDone: true},
             {id: v1(), title: "Fish", isDone: false},
             {id: v1(), title: "Beer", isDone: false},
-            {id: v1(), title: "Juce", isDone: false}
+            {id: v1(), title: "Juice", isDone: false}
         ]
     })
 
@@ -91,9 +91,17 @@ function App() {
         /*setTasks({...tasks})*/
     }
 
+    function addTodoList ( title: string) {
+        let newTodolistId = v1()
+        let newTodoList: TodolistType = { id: newTodolistId, title: title, filter: "all"}
+        setTodoLists([newTodoList, ...todoLists])
+        setTasks({...tasks, [newTodolistId]: []})
+    }
+
     return (
         <div className="App">
             <header className="App-header">
+
                 <div>
                     {todoLists.map(tl => {
                         let tasksForTodolist = tasks[tl.id];

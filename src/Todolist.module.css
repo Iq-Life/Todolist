@@ -5,25 +5,8 @@
     padding: 0 10px 5px 10px;
     margin: 5px 10px;
 }
-.input {
-    background-color: #ddddff;
-    padding: 2px;
-    margin: 0 3px;
-    border-radius: 5px;
-    border: double 3px;
-}
-.error {
-    background-color: #ddddff;
-    padding: 2px;
-    margin: 0 3px;
-    border-radius: 5px;
-    border: double 3px red;
-}
 .active-filter {
     background-color: #8585d7;
-}
-.but_add {
-
 }
 .but_del {
     background-color: Gray;
