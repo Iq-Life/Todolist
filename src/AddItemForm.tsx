@@ -3,7 +3,7 @@ import s from './AddItemForm.module.css'
 
 
 type AddItemFormType = {
-    addTask: (title: string) => void
+    addItem: (title: string) => void
 }
 
 export function AddItemForm(props: AddItemFormType) {
@@ -13,7 +13,7 @@ export function AddItemForm(props: AddItemFormType) {
 
     const addTask = () => {
         if (title.trim() !== "") {
-            props.addTask(title.trim())
+            props.addItem(title.trim())
             setTitle("")
         } else {
             setError("Title is required")
