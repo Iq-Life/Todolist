@@ -5,6 +5,13 @@
     padding: 0 10px 5px 10px;
     margin: 5px 10px;
 }
+.ButDelTL{
+    position: absolute;
+    bottom: 0;
+    top: 5%;
+    left: 15%;
+    margin: 0 0 5px 0;
+}
 .active-filter {
     background-color: #8585d7;
 }

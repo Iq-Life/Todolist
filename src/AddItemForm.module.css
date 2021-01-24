@@ -13,5 +13,6 @@
     border: double 3px red;
 }
 .but_add {
-
+padding: 2px;
+    margin: 2px;
 }

@@ -3,6 +3,9 @@ import s from './Todolist.module.css'
 import {FilterValueType, TaskType} from "./App";
 import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
+import {Checkbox, IconButton} from "@material-ui/core";
+import {Delete} from "@material-ui/icons";
+
 
 export type PropsType = {
     id: string
@@ -27,9 +30,17 @@ export function Todolist(props: PropsType) {
         const changeTitle = (title:string) => props.changeTaskTitle(t.id, title, props.id)
 
         return <li key={t.id} className={t.isDone ? s.is_done : ""}>
-            <input type="checkbox" checked={t.isDone} onChange={onChangeStatus}/>
+            {/*<input type="checkbox" checked={t.isDone} onChange={onChangeStatus}/>*/}
+            <Checkbox
+                checked={t.isDone}
+                onChange={onChangeStatus}
+                size="small"
+                color='primary'
+            />
             <EditableSpan changeTitle={changeTitle} title={t.title}/>
-            <button className={s.but_del} onClick={onClickHandler}>]X[</button>
+            <IconButton className={s.but_del} aria-label="delete" size="small" color='primary' onClick={onClickHandler}>
+                <Delete/>
+            </IconButton>
         </li>
     })
 
@@ -43,7 +54,10 @@ export function Todolist(props: PropsType) {
     return <div className={s.Todo}>
         <h3>
         <EditableSpan title={props.title} changeTitle={changeTodoListTitle}/>
-            <button onClick={removeTodoList}>x</button>
+            <IconButton className={s.ButDelTL} aria-label="delete" size="small" color='inherit' onClick={removeTodoList}>
+                <Delete/>
+            </IconButton>
+
         </h3>
         <AddItemForm addItem={addTask} />
         <ul className={s.ul}>
