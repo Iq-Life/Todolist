@@ -5,6 +5,7 @@ import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
 import {Checkbox, IconButton} from "@material-ui/core";
 import {Delete} from "@material-ui/icons";
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
 
 export type PropsType = {
@@ -30,7 +31,6 @@ export function Todolist(props: PropsType) {
         const changeTitle = (title:string) => props.changeTaskTitle(t.id, title, props.id)
 
         return <li key={t.id} className={t.isDone ? s.is_done : ""}>
-            {/*<input type="checkbox" checked={t.isDone} onChange={onChangeStatus}/>*/}
             <Checkbox
                 checked={t.isDone}
                 onChange={onChangeStatus}
