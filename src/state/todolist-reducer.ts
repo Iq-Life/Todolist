@@ -7,7 +7,7 @@ export type ActionType = ReturnType<typeof removeTodoListAC> | ReturnType<typeof
 export const todoListReducer = (state: Array<TodoListType>, action: ActionType): Array<TodoListType> => {
     switch (action.type) {
         case "REMOVE-TODOLIST": {
-            return {...state.filter(tl => tl.id !== action.todolistId)}
+            return state.filter(tl => tl.id !== action.todolistId)
         }
         case "ADD-TODOLIST": {
             return [...state, {id: v1(), title: action.title, filter: "all"}]
@@ -24,7 +24,7 @@ export const todoListReducer = (state: Array<TodoListType>, action: ActionType):
             if (todoList) {
                 todoList.filter = action.filter
             }
-            return state
+            return [...state]
         default:
             return state
     }
