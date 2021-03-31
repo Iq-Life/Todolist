@@ -1,9 +1,14 @@
+/*
 .Todo {
     border: #61dafb 2px solid;
     background-color: #282c34;
     border-radius: 5px;
     padding: 0 10px 5px 10px;
     margin: 5px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 .ButDelTL{
     position: absolute;
@@ -22,14 +27,21 @@
     margin-left: 10px;
     font-size: x-small;
 }
+ */
+/*
+
+ */
 .ul {
     text-align: left;
     color: black;
-    /*Универсальное свойство, позволяющее одновременно задать стиль маркера,
-    его положение, а также изображение, которое будет использоваться в качестве маркера .
-    Для подробного ознакомления смотрите информацию о каждом свойстве list-style-type,
-    list-style-position и list-style-image отдельно.*/
+    margin-left: 0;
+    padding-left: 0;
+}
+li {
+    list-style-type: none;
 }
 .is_done{
     opacity: 0.5;
 }
+
+
