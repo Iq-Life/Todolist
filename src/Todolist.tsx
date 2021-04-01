@@ -25,19 +25,20 @@ export type PropsType = {
 export function Todolist(props: PropsType) {
 
     const tasks = props.tasks.map(t => {
-
         const onClickHandler = () => props.removeTasks(t.id, props.id)
         const onChangeStatus = (e: ChangeEvent<HTMLInputElement>) => {
             props.changeStatus(t.id, e.currentTarget.checked, props.id)
         }
         const changeTitle = (title: string) => props.changeTaskTitle(t.id, title, props.id)
 
-        return <li key={t.id} className={t.isDone ? s.is_done : ""}>
+        return <li key={t.id} className={t.isDone ? s.is_done : ""}
+        style={{paddingLeft: "0", listStyleType: "none", margin: "0"}}>
             <Checkbox
                 checked={t.isDone}
                 onChange={onChangeStatus}
                 size="small"
-                color='primary'
+                style={t.isDone ? {opacity: 0.9} : {opacity: 1}}
+                color='secondary'
             />
             <EditableSpan changeTitle={changeTitle} title={t.title}/>
             <IconButton className={s.but_del} aria-label="delete" size="small" color='default' onClick={onClickHandler}>
@@ -46,10 +47,9 @@ export function Todolist(props: PropsType) {
         </li>
     })
 
+
     const removeTodoList = () => props.removeTodoList(props.id)
-    const addTask = (title: string) => {
-        props.addTask(title, props.id)
-    }
+    const addTask = (title: string) => {props.addTask(title, props.id)}
     const changeFilterAll = () => props.changeFilter("all", props.id)
     const changeFilterActive = () => props.changeFilter("active", props.id)
     const changeFilterCompleted = () => props.changeFilter("completed", props.id)
@@ -67,13 +67,15 @@ export function Todolist(props: PropsType) {
         </Button>
         </div>
 
-        <h2 style={{display: "flex", justifyContent: "center", marginTop: "0", fontFamily: "Bradley Hand, cursive"}}>
+        <h2 style={{display: "flex", justifyContent: "center", marginTop: "0",
+            fontFamily: "Bradley Hand, cursive", marginBottom: "5px"}}>
             <EditableSpan title={props.title} changeTitle={changeTodoListTitle}/>
         </h2>
 
         <AddItemForm addItem={addTask}/>
-        <ul style={{fontFamily: "Bradley Hand, cursive"}}>
+        <ul style={{fontFamily: "Bradley Hand, cursive",paddingLeft: "0", marginBottom: "0"}}>
             {tasks}
+            <div style={{display: "flex", justifyContent: "center", marginTop: "10px"}}>
             <Button variant={props.colorFilter === "all" ? "contained" : "text"}
                     onClick={changeFilterAll}>All
             </Button>
@@ -85,6 +87,7 @@ export function Todolist(props: PropsType) {
                     color={"secondary"}
                     onClick={changeFilterCompleted}>Completed
             </Button>
+            </div>
         </ul>
     </div>
 }

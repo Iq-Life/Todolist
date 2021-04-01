@@ -21,9 +21,6 @@ export type TaskType = {
 export type TasksStateType = {
     [key: string]: Array<TaskType>
 }
-export type TodoListStateType = {
-    [key: string]: Array<TodoListType>
-}
 
 function App() {
 
@@ -118,7 +115,7 @@ function App() {
     }
 
     return (
-        <div >
+        <div>
             <AppBar position="static">
                 <Toolbar>
                     <IconButton edge="start" color="inherit" aria-label="menu">
@@ -132,12 +129,14 @@ function App() {
             </AppBar>
             <Container fixed>
 
-                <Grid container style={{padding : "15px"}}>
+                <Grid container style={{padding: "15px"}}>
                     <AddItemForm addItem={addTodoList}/>
                 </Grid>
-                <Grid container spacing={4} style={{display: "flex", justifyContent: "space-between",
-                    flexWrap: "wrap", flexDirection: "row"}}>
-                    <div style={{display: "flex", justifyContent: "space-around"}}>
+                <Grid container spacing={4} style={{
+                    display: "flex", justifyContent: "space-between",
+                    flexWrap: "wrap", flexDirection: "row"
+                }}>
+                    <div style={{display: "flex", justifyContent: "space-around", flexWrap: "wrap"}}>
                         {todoLists.map(tl => {
                             let tasksForTodolist = tasks[tl.id];
                             if (tl.filter === "completed") {
@@ -147,23 +146,22 @@ function App() {
                                 tasksForTodolist = tasks[tl.id].filter(task => !task.isDone)
                             }
                             return (
-                                <Grid item spacing={4} style={{margin : "15px"}}>
-                                    <Paper elevation={5} style={{
-                                        padding : "15px", display: "flex"}}>
-                                    <Todolist
-                                        key={tl.id}
-                                        id={tl.id}
-                                        title={tl.title}
-                                        colorFilter={tl.filter}
-                                        tasks={tasksForTodolist}
-                                        addTask={addTasks}
-                                        removeTasks={removeTasks}
-                                        changeFilter={changeFilter}
-                                        removeTodoList={removeTodoList}
-                                        changeTaskTitle={changeTaskTitle}
-                                        changeStatus={changeTaskStatus}
-                                        changeTodoListTitle={changeTodoListTitle}
-                                    />
+                                <Grid item spacing={4} style={{margin: "15px"}}>
+                                    <Paper elevation={5} style={{padding: "15px", display: "flex"}}>
+                                        <Todolist
+                                            key={tl.id}
+                                            id={tl.id}
+                                            title={tl.title}
+                                            colorFilter={tl.filter}
+                                            tasks={tasksForTodolist}
+                                            addTask={addTasks}
+                                            removeTasks={removeTasks}
+                                            changeFilter={changeFilter}
+                                            removeTodoList={removeTodoList}
+                                            changeTaskTitle={changeTaskTitle}
+                                            changeStatus={changeTaskStatus}
+                                            changeTodoListTitle={changeTodoListTitle}
+                                        />
                                     </Paper>
                                 </Grid>
                             )

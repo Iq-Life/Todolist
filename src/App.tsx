@@ -3,8 +3,6 @@ import './App.css';
 import {Todolist} from "./Todolist";
 import {v1} from "uuid";
 import {AddItemForm} from "./AddItemForm";
-import {AppBar, Button, IconButton, Toolbar, Typography} from "@material-ui/core";
-import {Menu} from "@material-ui/icons";
 
 export type FilterValueType = "all" | "active" | "completed"
 
@@ -27,7 +25,7 @@ export type TodoListStateType = {
     [key: string]: Array<TodoListType>
 }
 
-function App() {
+function AppCss() {
 
     const todoListId1 = v1()
     const todoListId2 = v1()
@@ -154,4 +152,4 @@ function App() {
     );
 }
 
-export default App;
+export default AppCss;

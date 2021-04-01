@@ -1,5 +1,6 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import s from './EditableSpan.module.css'
+import {TextField} from "@material-ui/core";
 
 
 type EditableSpanType = {
@@ -33,6 +34,6 @@ export function EditableSpan(props: EditableSpanType) {
         setTitle(e.currentTarget.value)
     }
     return editMode
-        ? <input autoFocus={true} onBlur={offEditMode} value={title} onChange={onChange} onKeyPress={onKeyPress}/>
+        ? <TextField variant={"outlined"} autoFocus={true} onBlur={offEditMode} value={title} onChange={onChange} onKeyPress={onKeyPress}/>
         : <span onDoubleClick={onEditMode} className={s.ul_span}>{props.title}</span>
 }
