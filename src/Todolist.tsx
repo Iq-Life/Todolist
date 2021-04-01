@@ -16,7 +16,7 @@ export type PropsType = {
     removeTodoList: (todoListId: string) => void
     addTask: (title: string, todoListId: string) => void
     removeTasks: (id: string, todoListId: string) => void
-    changeFilter: (value: FilterValueType, todoListId: string) => void
+    changeFilter: (todoListId: string, value: FilterValueType) => void
     changeTaskTitle: (id: string, title: string, todoListId: string) => void
     changeStatus: (id: string, isDone: boolean, todoListId: string) => void
     changeTodoListTitle: (title: string, todoListId: string) => void
@@ -50,9 +50,9 @@ export function Todolist(props: PropsType) {
 
     const removeTodoList = () => props.removeTodoList(props.id)
     const addTask = (title: string) => {props.addTask(title, props.id)}
-    const changeFilterAll = () => props.changeFilter("all", props.id)
-    const changeFilterActive = () => props.changeFilter("active", props.id)
-    const changeFilterCompleted = () => props.changeFilter("completed", props.id)
+    const changeFilterAll = () => props.changeFilter(props.id, "all")
+    const changeFilterActive = () => props.changeFilter(props.id, "active")
+    const changeFilterCompleted = () => props.changeFilter(props.id, "completed")
     const changeTodoListTitle = (title: string) => props.changeTodoListTitle(title, props.id)
 
     return <div>
