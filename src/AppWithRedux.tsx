@@ -1,7 +1,6 @@
-import React, {useReducer} from 'react';
+import React from 'react';
 import './App.css';
 import {Todolist} from "./Todolist";
-import {v1} from "uuid";
 import {AddItemForm} from "./AddItemForm";
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@material-ui/core";
 import {Menu} from "@material-ui/icons";
@@ -11,12 +10,6 @@ import {
     changeTodoListTitleAC,
     removeTodoListAC,
 } from "./state/todolist-reducer";
-import {
-    addTaskAC,
-    changeTaskStatusAC,
-    changeTitleTaskStatusAC,
-    removeTaskAC,
-} from "./state/tasks-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "./state/store";
 
@@ -39,26 +32,7 @@ export type TasksStateType = {
 function App() {
 
     const dispatch = useDispatch()
-
    const todoLists = useSelector<AppRootStateType, Array<TodoListType>>( state => state.todoLists)
-   const tasks = useSelector<AppRootStateType, TasksStateType>( state => state.tasks)
-
-    function addTasks(title: string, todoListId: string) {
-        dispatch(addTaskAC(title, todoListId))
-    }
-
-    function removeTasks(taskId: string, todoListId: string) {
-        dispatch(removeTaskAC(taskId, todoListId))
-    }
-
-    function changeTaskStatus(taskId: string, isDone: boolean, todoListId: string) {
-        dispatch(changeTaskStatusAC(taskId, isDone, todoListId))
-    }
-
-    function changeTaskTitle(taskId: string, title: string, todoListId: string) {
-        const action = changeTitleTaskStatusAC(taskId, title, todoListId)
-        dispatch(action)
-    }
 
     function changeTodoListTitle(todoListId: string, title: string) {
         dispatch(changeTodoListTitleAC(todoListId, title))
@@ -103,13 +77,7 @@ function App() {
                 }}>
                     <div style={{display: "flex", justifyContent: "space-around", flexWrap: "wrap"}}>
                         {todoLists.map(tl => {
-                            let tasksForTodolist = tasks[tl.id];
-                            if (tl.filter === "completed") {
-                                tasksForTodolist = tasks[tl.id].filter(task => task.isDone)
-                            }
-                            if (tl.filter === "active") {
-                                tasksForTodolist = tasks[tl.id].filter(task => !task.isDone)
-                            }
+
                             return (
                                 <Grid item spacing={4} style={{margin: "15px"}}>
                                     <Paper elevation={5} style={{padding: "15px", display: "flex"}}>
@@ -117,14 +85,9 @@ function App() {
                                             key={tl.id}
                                             id={tl.id}
                                             title={tl.title}
-                                            colorFilter={tl.filter}
-                                            tasks={tasksForTodolist}
-                                            addTask={addTasks}
-                                            removeTasks={removeTasks}
+                                            filter={tl.filter}
                                             changeFilter={changeFilter}
                                             removeTodoList={removeTodoList}
-                                            changeTaskTitle={changeTaskTitle}
-                                            changeStatus={changeTaskStatus}
                                             changeTodoListTitle={changeTodoListTitle}
                                         />
                                     </Paper>
