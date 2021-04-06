@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import './App.css';
 import {Todolist} from "./Todolist";
 import {AddItemForm} from "./AddItemForm";
@@ -48,10 +48,10 @@ function App() {
 
     }
 
-    function addTodoList(title: string) {
+const addTodoList = useCallback((title: string) => {
         const action = addTodoListAC(title)
         dispatch(action)
-    }
+    }, [])
 
     return (
         <div>
