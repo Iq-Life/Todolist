@@ -1,4 +1,4 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from "react";
+import React, {ChangeEvent, KeyboardEvent, useCallback, useState} from "react";
 import {IconButton, TextField} from "@material-ui/core";
 import AddBoxTwoToneIcon from '@material-ui/icons/AddBoxTwoTone';
 
@@ -11,27 +11,27 @@ export const AddItemForm = React.memo ((props: AddItemFormType) => {
     let [title, setTitle] = useState<string>("")
     let [error, setError] = useState<string | null>(null)
 
-    const addTask = () => {
+    const addTask = useCallback(() => {
         if (title.trim() !== "") {
             props.addItem(title.trim())
             setTitle("")
         } else {
             setError("Title is required")
         }
-    }
+    },[])
 
-    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
-    }
+    },[])
 
-    const onKeyPress = ({charCode}: KeyboardEvent<HTMLInputElement>) => {
+    const onKeyPress = useCallback(({charCode}: KeyboardEvent<HTMLInputElement>) => {
         if (error !== null){
             setError(null)
         }
         if (charCode === 13) {
             addTask()
         }
-    }
+    },[])
 
     return <div>
         <TextField
