@@ -32,22 +32,22 @@ function App() {
 
     const changeTodoListTitle = useCallback((todoListId: string, title: string) => {
         dispatch(changeTodoListTitleAC(todoListId, title))
-    }, [])
+    }, [dispatch])
 
     const changeFilter = useCallback((todoListId: string, value: FilterValueType) => {
         dispatch(changeTodoListFilterAC(todoListId, value))
-    }, [])
+    }, [dispatch])
 
     const removeTodoList = useCallback((todoListId: string) => {
         const action = removeTodoListAC(todoListId)
         dispatch(action)
 
-    }, [])
+    }, [dispatch])
 
 const addTodoList = useCallback((title: string) => {
         const action = addTodoListAC(title)
         dispatch(action)
-    }, [])
+    }, [dispatch])
 
     return (
         <div>

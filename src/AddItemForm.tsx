@@ -18,7 +18,7 @@ export const AddItemForm = React.memo ((props: AddItemFormType) => {
         } else {
             setError("Title is required")
         }
-    },[])
+    },[props, title])
 
     const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
@@ -31,7 +31,7 @@ export const AddItemForm = React.memo ((props: AddItemFormType) => {
         if (charCode === 13) {
             addTask()
         }
-    },[])
+    },[addTask, error])
 
     return <div>
         <TextField

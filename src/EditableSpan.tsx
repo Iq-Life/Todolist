@@ -16,12 +16,14 @@ export const EditableSpan= React.memo((props: EditableSpanType) => {
     const onEditMode = useCallback(() => {
         setEditMode(true)
     }, [])
+
     const offEditMode = useCallback(() => {
         setEditMode(false)
         if (title.trim()) {
             props.changeTitle(title.trim())
         }
-    }, [])
+    }, [props, title])
+
     const onKeyPress = useCallback(({charCode}: KeyboardEvent<HTMLInputElement>) => {
         if (charCode === 13) {
             if (title.trim()) {
@@ -29,10 +31,12 @@ export const EditableSpan= React.memo((props: EditableSpanType) => {
             }
             setEditMode(false)
         }
-    }, [])
+    }, [props, title])
+
     const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
     }, [])
+
     return editMode
         ? <TextField variant={"outlined"} autoFocus={true} onBlur={offEditMode} value={title} onChange={onChange} onKeyPress={onKeyPress}/>
         : <span onDoubleClick={onEditMode} className={s.ul_span}>{props.title}</span>

@@ -26,12 +26,13 @@ export const Todolist = React.memo((props: PropsType) => {
     const dispatch = useDispatch()
 
 
-    const removeTodoList = useCallback(() => props.removeTodoList(props.id),[])
-    const addTask = useCallback((title: string) => dispatch(addTaskAC(title, props.id)),[])
-    const changeFilterAll = useCallback(() => props.changeFilter(props.id, "all"),[])
-    const changeFilterActive = useCallback(() => props.changeFilter(props.id, "active"),[])
-    const changeFilterCompleted = useCallback(() => props.changeFilter(props.id, "completed"),[])
-    const changeTodoListTitle = useCallback((title: string) => props.changeTodoListTitle(title, props.id),[])
+    const removeTodoList = useCallback(() => props.removeTodoList(props.id),[props])
+    const addTask = useCallback((title: string) => dispatch(addTaskAC(title, props.id)),[dispatch, props])
+    const changeTodoListTitle = useCallback((title: string) => props.changeTodoListTitle(title, props.id),[props])
+
+    const changeFilterAll = useCallback(() => props.changeFilter(props.id, "all"),[props])
+    const changeFilterActive = useCallback(() => props.changeFilter(props.id, "active"),[props])
+    const changeFilterCompleted = useCallback(() => props.changeFilter(props.id, "completed"),[props])
 
     let tasksForTodolist = tasks
     if (props.filter === "completed") {
