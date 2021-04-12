@@ -1,14 +1,13 @@
-import React, {ChangeEvent, useCallback} from "react";
-import s from './Todolist.module.css'
+import React, {useCallback} from "react";
 import {FilterValueType, TaskType} from "./AppWithRedux";
 import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
-import {Button, Checkbox, IconButton} from "@material-ui/core";
-import {Delete} from "@material-ui/icons";
+import {Button} from "@material-ui/core";
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "./state/store";
-import {addTaskAC, changeTaskStatusAC, changeTitleTaskStatusAC, removeTaskAC} from "./state/tasks-reducer";
+import {addTaskAC} from "./state/tasks-reducer";
+import {Task} from "./Task";
 
 
 export type PropsType = {
@@ -28,24 +27,24 @@ export const Todolist = React.memo((props: PropsType) => {
 
     const removeTodoList = useCallback(() => props.removeTodoList(props.id),[props])
     const addTask = useCallback((title: string) => dispatch(addTaskAC(title, props.id)),[dispatch, props])
-    const changeTodoListTitle = useCallback((title: string) => props.changeTodoListTitle(title, props.id),[props])
+    const changeTodoListTitle = useCallback((title: string) => props.changeTodoListTitle(props.id, title),[props])
 
     const changeFilterAll = useCallback(() => props.changeFilter(props.id, "all"),[props])
     const changeFilterActive = useCallback(() => props.changeFilter(props.id, "active"),[props])
     const changeFilterCompleted = useCallback(() => props.changeFilter(props.id, "completed"),[props])
 
-    let tasksForTodolist = tasks
+    let allTodolistTasks = tasks
+    let tasksForTodolist = allTodolistTasks
     if (props.filter === "completed") {
-        tasksForTodolist = tasks.filter(task => task.isDone)
+        tasksForTodolist = allTodolistTasks.filter(task => task.isDone)
     }
     if (props.filter === "active") {
-        tasksForTodolist = tasks.filter(task => !task.isDone)
+        tasksForTodolist = allTodolistTasks.filter(task => !task.isDone)
     }
 
     return <div>
         <div style={{display: "flex", justifyContent: "flex-end"}}>
             <Button
-
                 variant="outlined"
                 color="secondary"
                 startIcon={<DeleteForeverIcon/>}
@@ -63,29 +62,9 @@ export const Todolist = React.memo((props: PropsType) => {
 
         <AddItemForm addItem={addTask}/>
         <ul style={{fontFamily: "Bradley Hand, cursive", paddingLeft: "0", marginBottom: "0"}}>
-            {tasksForTodolist.map(t => {
-                const onClickHandler = () => dispatch(removeTaskAC(t.id, props.id))
-                const onChangeStatus = (e: ChangeEvent<HTMLInputElement>) => {
-                    dispatch(changeTaskStatusAC(t.id, e.currentTarget.checked, props.id))
-                }
-                const changeTitle = (title: string) => dispatch(changeTitleTaskStatusAC(t.id, title, props.id))
-
-                return <li key={t.id} className={t.isDone ? s.is_done : ""}
-                           style={{paddingLeft: "0", listStyleType: "none", margin: "0"}}>
-                    <Checkbox
-                        checked={t.isDone}
-                        onChange={onChangeStatus}
-                        size="small"
-                        style={t.isDone ? {opacity: 0.9} : {opacity: 1}}
-                        color='secondary'
-                    />
-                    <EditableSpan changeTitle={changeTitle} title={t.title}/>
-                    <IconButton className={s.but_del} aria-label="delete" size="small" color='default'
-                                onClick={onClickHandler}>
-                        <Delete/>
-                    </IconButton>
-                </li>
-            })}
+            {
+                tasksForTodolist.map(task => <Task task={task} todolistId={props.id}/>)
+            }
             <div style={{display: "flex", justifyContent: "center", marginTop: "10px"}}>
                 <Button variant={props.filter === "all" ? "contained" : "text"}
                         onClick={changeFilterAll}>All
