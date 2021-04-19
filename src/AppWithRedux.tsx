@@ -73,7 +73,6 @@ const addTodoList = useCallback((title: string) => {
                 }}>
                     <div style={{display: "flex", justifyContent: "space-around", flexWrap: "wrap"}}>
                         {todoLists.map(tl => {
-
                             return (
                                 <Grid item spacing={4} style={{margin: "15px"}}>
                                     <Paper elevation={5} style={{padding: "15px", display: "flex"}}>

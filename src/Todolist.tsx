@@ -4,10 +4,10 @@ import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
 import {Button} from "@material-ui/core";
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "./state/store";
 import {addTaskAC} from "./state/tasks-reducer";
 import {Task} from "./Task";
+import {useDispatch, useSelector} from "react-redux";
 
 
 export type PropsType = {
@@ -20,7 +20,6 @@ export type PropsType = {
 }
 
 export const Todolist = React.memo((props: PropsType) => {
-
     const tasks = useSelector<AppRootStateType, Array<TaskType>>(state => state.tasks[props.id])
     const dispatch = useDispatch()
 
@@ -41,7 +40,6 @@ export const Todolist = React.memo((props: PropsType) => {
     if (props.filter === "active") {
         tasksForTodolist = allTodolistTasks.filter(task => !task.isDone)
     }
-
     return <div>
         <div style={{display: "flex", justifyContent: "flex-end"}}>
             <Button
