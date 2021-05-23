@@ -1,26 +1,26 @@
 /*
 .App {
-    text-align: center;
-}
-.App-header {
-    background-color: DimGray;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #61dafb;
-}
-.error {
-    border: red 1px solid;
-}
-.error-message {
-    color: red;
-}
-.active-filter {
-    background-color: #8585d7;
-}
-.is-done {
-    opacity: 0.5;
+  padding: 30px;
+  display: flex;
 }
 
+.App > div {
+  margin-right: 50px;
+}
+
+.error {
+  border: red 1px solid;
+}
+
+.error-message {
+  color: red;
+}
+
+.active-filter {
+  background-color: aquamarine;
+}
+
+.is-done {
+  opacity: 0.5;
+}
 */
