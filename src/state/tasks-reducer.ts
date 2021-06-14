@@ -1,12 +1,26 @@
 import {TasksStateType, TaskType} from "../AppWithRedux";
 import {v1} from "uuid";
-import {addTodoListAC, removeTodoListAC, setTodolistsAC} from "./todolist-reducer";
+import {addTodoListAC, removeTodoListAC, todoListId1, todoListId2} from "./todolist-reducer";
 
 type ActionsType = ReturnType<typeof removeTaskAC> | ReturnType<typeof addTaskAC>
     | ReturnType<typeof changeTaskStatusAC> | ReturnType<typeof changeTitleTaskStatusAC>
-    | ReturnType<typeof addTodoListAC> | ReturnType<typeof removeTodoListAC> | ReturnType<typeof setTodolistsAC>
+    | ReturnType<typeof addTodoListAC> | ReturnType<typeof removeTodoListAC>
 
-const initialState: TasksStateType = {}
+const initialState: TasksStateType = {
+    [todoListId1]: [
+        {id: v1(), title: "HTML&CSS", isDone: true},
+        {id: v1(), title: "JS", isDone: false},
+        {id: v1(), title: "React", isDone: false},
+        {id: v1(), title: "Redax", isDone: false}
+    ],
+    [todoListId2]: [
+        {id: v1(), title: "Milk", isDone: true},
+        {id: v1(), title: "Fish", isDone: false},
+        {id: v1(), title: "Beer", isDone: false},
+        {id: v1(), title: "Juice", isDone: false}
+    ]
+}
+
 
 export const tasksReducer = (state: TasksStateType = initialState, action: ActionsType) => {
     switch (action.type) {
@@ -34,13 +48,6 @@ export const tasksReducer = (state: TasksStateType = initialState, action: Actio
         case "REMOVE-TODOLIST": {
             const stateCopy = {...state}
             delete stateCopy[action.todoListId]
-            return stateCopy
-        }
-        case "SET-TODOLISTS":{
-            const stateCopy = {...state}
-            action.todolists.forEach(tl => {
-                stateCopy[tl.id] = []
-            })
             return stateCopy
         }
         default:

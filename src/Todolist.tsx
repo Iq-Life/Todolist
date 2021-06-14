@@ -9,7 +9,7 @@ import {addTaskAC} from "./state/tasks-reducer";
 import {Task} from "./Task";
 import {useDispatch, useSelector} from "react-redux";
 
-//1
+
 export type PropsType = {
     id: string
     title: string

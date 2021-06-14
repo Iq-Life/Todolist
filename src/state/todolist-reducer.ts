@@ -3,9 +3,14 @@ import {v1} from "uuid";
 
 export type ActionType = ReturnType<typeof removeTodoListAC> | ReturnType<typeof addTodoListAC>
 |  ReturnType<typeof changeTodoListTitleAC> | ReturnType<typeof changeTodoListFilterAC>
-    | ReturnType<typeof setTodolistsAC>
 
-const initialState: Array<TodoListType> = []
+export let todoListId1 = v1()
+export let todoListId2 = v1()
+
+const initialState: Array<TodoListType> = [
+    {id: todoListId1, title: "Film", filter: "all"},
+    {id: todoListId2, title: "Music", filter: "all"}
+]
 
 export const todoListReducer = (state: Array<TodoListType> = initialState, action: ActionType): Array<TodoListType> => {
     switch (action.type) {
@@ -18,14 +23,8 @@ export const todoListReducer = (state: Array<TodoListType> = initialState, actio
         case "CHANGE-TODOLIST-TITLE": {
             return state.map(tl => tl.id === action.id ? {...tl, title: action.title} : tl)
         }
-        case "CHANGE-TODOLIST-FILTER": {
-            return state.map(tl => tl.id === action.id ? {...tl, filter: action.filter} : tl)
-        }
-        case "SET-TODOLISTS": {
-            return action.todolists.map(tl=> {
-                return {...tl, filter:'all'}
-            })
-        }
+        case "CHANGE-TODOLIST-FILTER":
+            return state.map(tl => tl.id === action.id ? {...tl, filter : action.filter} : tl)
         default:
             return state
     }
@@ -42,7 +41,4 @@ export const changeTodoListTitleAC = (id: string, title: string) => {
 }
 export const changeTodoListFilterAC = (id: string, filter: FilterValueType) => {
     return {type: "CHANGE-TODOLIST-FILTER", id, filter} as const
-}
-export const setTodolistsAC = (todolists: Array<TodoListType>) =>{
-    return {type: "SET-TODOLISTS", todolists} as const
 }

@@ -4,15 +4,12 @@ import {combineReducers, createStore} from 'redux'
 import {tasksReducer} from '../state/tasks-reducer'
 import {v1} from 'uuid'
 import {AppRootStateType} from '../state/store'
-import {todoListReducer} from "../state/todolist-reducer";
+import {todoListId1, todoListId2, todoListReducer} from "../state/todolist-reducer";
 import '@storybook/addon-console';
 const rootReducer = combineReducers({
     tasks: tasksReducer,
     todoLists: todoListReducer
 })
-export let todoListId1 = v1()
-export let todoListId2 = v1()
-
 const initialGlobalState: AppRootStateType = {
     todoLists: [
         {id: todoListId1, title: "Film", filter: "all"},
