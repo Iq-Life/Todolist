@@ -29,6 +29,7 @@ export type TaskType = {
     order: number
     addedDate: string
 }
+
 type UpdateTaskModelType = {
     title: string
     description: string | null
