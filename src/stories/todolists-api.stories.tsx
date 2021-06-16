@@ -4,7 +4,6 @@ import {todolistsAPI} from "../api/todolists-api";
 export default {
     title: 'API'
 }
-//yeees
 export const GetTodolists = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
