@@ -1,13 +1,13 @@
 import React, {useCallback} from "react";
-import {FilterValueType, TaskType} from "./AppWithRedux";
 import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
 import {Button} from "@material-ui/core";
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import {AppRootStateType} from "./state/store";
-import {addTaskAC} from "./state/tasks-reducer";
+import {addTaskAC, TaskType} from "./state/tasks-reducer";
 import {Task} from "./Task";
-import {useDispatch, useSelector} from "react-redux";
+import { FilterValueType } from "./state/todolist-reducer";
+import {useDispatch, useSelector } from "react-redux";
 
 
 export type PropsType = {
@@ -20,10 +20,10 @@ export type PropsType = {
 }
 
 export const Todolist = React.memo((props: PropsType) => {
+    
     const tasks = useSelector<AppRootStateType, Array<TaskType>>(state => state.tasks[props.id])
     const dispatch = useDispatch()
-
-
+    
     const removeTodoList = useCallback(() => props.removeTodoList(props.id),[props])
     const addTask = useCallback((title: string) => dispatch(addTaskAC(title, props.id)),[dispatch, props])
     const changeTodoListTitle = useCallback((title: string) => props.changeTodoListTitle(props.id, title),[props])
@@ -31,7 +31,7 @@ export const Todolist = React.memo((props: PropsType) => {
     const changeFilterAll = useCallback(() => props.changeFilter(props.id, "all"),[props])
     const changeFilterActive = useCallback(() => props.changeFilter(props.id, "active"),[props])
     const changeFilterCompleted = useCallback(() => props.changeFilter(props.id, "completed"),[props])
-
+ 
     let allTodolistTasks = tasks
     let tasksForTodolist = allTodolistTasks
     if (props.filter === "completed") {
