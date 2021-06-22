@@ -14,19 +14,23 @@ export type PropsType = {
     id: string
     title: string
     filter: FilterValueType
-    removeTodoList: (todoListId: string) => void
-    changeFilter: (todoListId: string, value: FilterValueType) => void
-    changeTodoListTitle: (title: string, todoListId: string) => void
+    removeTodolist: (todolistId: string) => void
+    changeFilter: (todolistId: string, value: FilterValueType) => void
+    changeTodolistTitle: (title: string, todolistId: string) => void
 }
 
 export const Todolist = React.memo((props: PropsType) => {
     
     const tasks = useSelector<AppRootStateType, Array<TaskType>>(state => state.tasks[props.id])
     const dispatch = useDispatch()
+
+    useEffect(()=>{
+        fetchTasksTC(props.id)
+    },[])
     
-    const removeTodoList = useCallback(() => props.removeTodoList(props.id),[props])
+    const removeTodoList = useCallback(() => props.removeTodolist(props.id),[props])
     const addTask = useCallback((title: string) => dispatch(addTaskAC(title, props.id)),[dispatch, props])
-    const changeTodoListTitle = useCallback((title: string) => props.changeTodoListTitle(props.id, title),[props])
+    const changeTodolistTitle = useCallback((title: string) => props.changeTodolistTitle(props.id, title),[props])
 
     const changeFilterAll = useCallback(() => props.changeFilter(props.id, "all"),[props])
     const changeFilterActive = useCallback(() => props.changeFilter(props.id, "active"),[props])
@@ -46,7 +50,7 @@ export const Todolist = React.memo((props: PropsType) => {
                 variant="outlined"
                 color="secondary"
                 startIcon={<DeleteForeverIcon/>}
-                onClick={removeTodoList}
+                onClick={removeTodolist}
             >
             </Button>
         </div>
@@ -55,7 +59,7 @@ export const Todolist = React.memo((props: PropsType) => {
             display: "flex", justifyContent: "center", marginTop: "0",
             fontFamily: "Bradley Hand, cursive", marginBottom: "5px"
         }}>
-            <EditableSpan title={props.title} changeTitle={changeTodoListTitle}/>
+            <EditableSpan title={props.title} changeTitle={changeTodolistTitle}/>
         </h2>
 
         <AddItemForm addItem={addTask}/>
