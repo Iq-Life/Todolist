@@ -1,5 +1,5 @@
 import {v1} from "uuid";
-import { TodolistType } from "../api/todolists-api";
+import { TodolistType } from "../../api/todolists-api";
 import {addTodolistAC, changeTodolistFilterAC, changeTodolistTitleAC, FilterValueType,
     removeTodolistAC, setTodolistsAC, TodolistDomainType, todolistReducer} from "./todolist-reducer";
 

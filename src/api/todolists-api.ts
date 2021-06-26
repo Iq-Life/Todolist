@@ -33,14 +33,14 @@ export const todolistsAPI = {
         return instance.get<GetTasksResponse>(`todo-lists/${todolistId}/tasks`)
     },
     createTask(todolistId:string, title: string){
-      return instance.post<ResponseType<{items:TaskType}>>(`todo-lists/${todolistId}/tasks`, {title: title})
+      return instance.post<ResponseType<{item:TaskType}>>(`todo-lists/${todolistId}/tasks`, {title: title})
     },
     deleteTask(todolistId: string, taskId : string) {
         return instance.delete<ResponseType<{}>>(`todo-lists/${todolistId}/tasks/${taskId}`)
     },
-    updateTask(todolistId: string, taskId : string, title:string) {
-        return instance.put<ResponseType<{items:TaskType}>>
-        (`todo-lists/${todolistId}/tasks/${taskId}`, {title: title})
+    updateTask(todolistId: string, taskId : string, model: UpdateTaskModelType) {
+        return instance.put<ResponseType<{item:TaskType}>>
+        (`todo-lists/${todolistId}/tasks/${taskId}`, model)
     }
 }
 
@@ -54,8 +54,8 @@ export type TodolistType = {
 export type TaskType = {
     description: string | null
     title: string
-    status: number
-    priority: number
+    status: TaskStatuses
+    priority: TaskPriorities
     startDate: string | null
     deadline: string | null
     id: string
@@ -63,7 +63,7 @@ export type TaskType = {
     order: number
     addedDate: string
 }
-type ResponseType<D> = {
+type ResponseType< D= {}> = {
     resultCode: number
     messages: Array<string>
     data: D
@@ -81,7 +81,7 @@ export enum TaskPriorities {
     Urgently = 3,
     Later = 4
 }
-type UpdateTaskModelType = {
+export type UpdateTaskModelType = {
     title: string
     description: string | null
     status: TaskStatuses
@@ -89,9 +89,9 @@ type UpdateTaskModelType = {
     startDate: string | null
     deadline: string | null
 }
-type CreateDataTodolistType = { items: TodolistType }
+type CreateDataTodolistType = { item: TodolistType }
 type GetTasksResponse = {
     error: string | null
     totalCount: number
-    items: TaskType[]
+    item: TaskType[]
 }
