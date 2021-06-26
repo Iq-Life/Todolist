@@ -5,7 +5,7 @@ import {addTodolistAC, changeTodolistFilterAC, changeTodolistTitleAC, FilterValu
 
 let todolistId1: string
 let todolistId2: string
-let startState: Array<TodolistDomainType>
+let startState: Array<TodolistDomainType> = []
 
 beforeEach(() => {
     todolistId1 = v1()
