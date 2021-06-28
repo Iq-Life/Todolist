@@ -1,7 +1,7 @@
 import React from "react";
-import {AddItemForm} from "../AddItemForm";
+import { AddItemForm } from "./AddItemForm";
 
-import {ReduxStoreProviderDecorator} from "./ReduxStoreProviderDecorator.stories";
+import {ReduxStoreProviderDecorator} from "../../stories/ReduxStoreProviderDecorator.stories";
 import '@storybook/addon-console';
 export default {
     title: "AddItemForm Component",

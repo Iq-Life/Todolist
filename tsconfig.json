@@ -19,5 +19,5 @@
     "noEmit": true,
     "jsx": "react"
   },
-  "include": ["./typings/**/*", "./src/**/*", "./test/**/*"]
+  "include": ["src"]
 }

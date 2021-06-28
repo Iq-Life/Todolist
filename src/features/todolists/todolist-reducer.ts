@@ -8,7 +8,7 @@ const initialState: Array<TodolistDomainType> = []
 export const todolistReducer = (state: Array<TodolistDomainType> = initialState, action: ActionType): Array<TodolistDomainType> => {
     switch (action.type) {
         case "REMOVE-TODOLIST": {
-            return state.filter(tl => tl.id !== action.todoListId)
+            return state.filter(tl => tl.id !== action.todolistId)
         }
         case "ADD-TODOLIST": {
             return [{...action.todolist, filter: "all"}, ...state]
@@ -28,8 +28,8 @@ export const todolistReducer = (state: Array<TodolistDomainType> = initialState,
 }
 
 //actions
-export const removeTodolistAC = (id: string) => {
-    return {type: "REMOVE-TODOLIST", todoListId: id} as const
+export const removeTodolistAC = (todolistId: string) => {
+    return {type: "REMOVE-TODOLIST", todolistId} as const
 }
 export const addTodolistAC = (todolist: TodolistType) => {
     return {type: "ADD-TODOLIST", todolist} as const

@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useCallback} from "react";
-import s from './Todolist.module.css'
+import s from '../Todolist.module.css'
 import {Checkbox, IconButton} from "@material-ui/core";
 import {Delete} from "@material-ui/icons";
 import {useDispatch} from "react-redux";

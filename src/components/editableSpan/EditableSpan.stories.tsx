@@ -1,6 +1,6 @@
 import React from "react";
-import {EditableSpan} from "../EditableSpan";
-import {ReduxStoreProviderDecorator} from "./ReduxStoreProviderDecorator.stories";
+import {EditableSpan} from "./EditableSpan";
+import {ReduxStoreProviderDecorator} from "../../stories/ReduxStoreProviderDecorator.stories";
 import '@storybook/addon-console';
 export default {
     title: "EditableSpan Component",
