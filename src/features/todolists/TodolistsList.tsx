@@ -52,6 +52,8 @@ export const TodolistsList: React.FC = () => {
         dispatch(changeTodolistFilterAC(todolistId, value))
     }, [dispatch])
 
+    console.log('tasks', tasks)
+
     return <>
         <Grid container style={{padding: "15px"}}>
             <AddItemForm addItem={addTodolist}/>
@@ -62,7 +64,8 @@ export const TodolistsList: React.FC = () => {
         }}>
             <div style={{display: "flex", justifyContent: "space-around", flexWrap: "wrap"}}>
                 {todolists.map(tl => {
-                    let allTodolistTasks = tasks[tl.id]
+
+                    let allTodolistTasks = tasks[tl.id] || []
                     return (
                         <Grid item spacing={4} style={{margin: "15px"}}>
                             <Paper elevation={5} style={{padding: "15px", display: "flex"}}>

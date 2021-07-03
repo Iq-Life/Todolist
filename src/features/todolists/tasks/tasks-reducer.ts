@@ -1,14 +1,8 @@
 import {Dispatch} from "redux";
 import {TaskPriorities, TaskStatuses, TaskType, todolistsAPI, UpdateTaskModelType} from "../../../api/todolists-api";
 import {AppRootStateType} from "../../../app/store";
-import {
-    addTodolistAC,
-    AddTodolistActionType,
-    removeTodolistAC,
-    RemoveTodolistActionType,
-    setTodolistsAC,
-    SetTodolistsActionType
-} from "../todolist-reducer";
+import {addTodolistAC, AddTodolistActionType, removeTodolistAC, RemoveTodolistActionType,
+    setTodolistsAC, SetTodolistsActionType} from "../todolist-reducer";
 
 
 const initialState: TasksStateType = {}
@@ -63,7 +57,8 @@ export const setTasksAC = (todolistId: string, tasks: Array<TaskType>) => {
 //thuks
 export const fetchTasksTC = (todolistId: string) => (dispatch: Dispatch) => {
     todolistsAPI.getTasks(todolistId).then(res => {
-        const tasks = res.data.item
+        const tasks = res.data.items
+        console.log('res.data', res.data)
         const action = setTasksAC(todolistId, tasks)
         dispatch(action)
     })
@@ -73,9 +68,10 @@ export const removeTaskTC = (todolistId: string, taskId: string) => (dispatch: D
         dispatch(removeTaskAC(todolistId, taskId))
     })
 }
-export const addTaskTC = (todolistId: string, title: string) => (dispatch: Dispatch) => {
-    todolistsAPI.createTask(todolistId, title).then(res => {
-        const task = res.data.data.item
+export const addTaskTC = (title: string, todolistId: string) => (dispatch: Dispatch) => {
+    todolistsAPI.createTask(title, todolistId).then(res => {
+        const task = res.data.data.items
+        console.log("+++" + res.data.data.items)
         dispatch(addTaskAC(task))
     })
 }
@@ -85,8 +81,7 @@ export const updateTaskTC = (todolistId: string, taskId: string, domainModel: Up
         const state = getState()
         const task = state.tasks[todolistId].find(t => t.id === taskId)
         if (!task) {
-            //throw new Error("task not found in the state")
-            console.warn("task not found in the state")
+            throw new Error("task not found in the state")
             return
         }
         const apiModel: UpdateTaskModelType = {

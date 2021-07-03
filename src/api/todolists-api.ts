@@ -32,14 +32,14 @@ export const todolistsAPI = {
     getTasks(todolistId: string) {
         return instance.get<GetTasksResponse>(`todo-lists/${todolistId}/tasks`)
     },
-    createTask(todolistId:string, title: string){
-      return instance.post<ResponseType<{item:TaskType}>>(`todo-lists/${todolistId}/tasks`, {title: title})
+    createTask( title: string, todolistId:string){
+      return instance.post<ResponseType<{items:TaskType}>>(`todo-lists/${todolistId}/tasks`, {title: title})
     },
     deleteTask(todolistId: string, taskId : string) {
         return instance.delete<ResponseType<{}>>(`todo-lists/${todolistId}/tasks/${taskId}`)
     },
     updateTask(todolistId: string, taskId : string, model: UpdateTaskModelType) {
-        return instance.put<ResponseType<{item:TaskType}>>
+        return instance.put<ResponseType<{items:TaskType}>>
         (`todo-lists/${todolistId}/tasks/${taskId}`, model)
     }
 }
@@ -93,5 +93,5 @@ type CreateDataTodolistType = { item: TodolistType }
 type GetTasksResponse = {
     error: string | null
     totalCount: number
-    item: TaskType[]
+    items: TaskType[]
 }
