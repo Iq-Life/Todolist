@@ -16,7 +16,7 @@ export const TaskBaseExample = (props: any) => {
     return (
         <div>
             <Task
-                task={{id: '1', status: TaskStatuses.Completed, title: "CSS", todolistId: "todolistId1", description: '',
+                task={{id: '1', status: TaskStatuses.Completed, title: "CSS", todoListId: "todolistId1", description: '',
                     startDate: '', deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low}}
                 removeTask={()=>{}}
                 changeTaskTitle={()=>{}}
@@ -24,7 +24,7 @@ export const TaskBaseExample = (props: any) => {
                 todolistId={"todolistId1"}
             />
             <Task
-                task={{id: '2', status: TaskStatuses.New, title: "JS", todolistId: "todolistId1", description: '',
+                task={{id: '2', status: TaskStatuses.New, title: "JS", todoListId: "todolistId1", description: '',
                     startDate: '', deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low}}
                 removeTask={()=>{}}
                 changeTaskTitle={()=>{}}

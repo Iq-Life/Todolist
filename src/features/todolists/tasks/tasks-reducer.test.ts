@@ -8,19 +8,19 @@ let startState: TasksStateType = {}
 beforeEach(() => {
     startState = {
         "todolistId1": [
-            { id: "1", title: "CSS", status: TaskStatuses.New, todolistId: "todolistId1", description: '',
+            { id: "1", title: "CSS", status: TaskStatuses.New, todoListId: "todolistId1", description: '',
                 startDate: '', deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low },
-            { id: "2", title: "JS", status: TaskStatuses.Completed, todolistId: "todolistId1", description: '',
+            { id: "2", title: "JS", status: TaskStatuses.Completed, todoListId: "todolistId1", description: '',
                 startDate: '', deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low },
-            { id: "3", title: "React", status: TaskStatuses.New, todolistId: "todolistId1", description: '',
+            { id: "3", title: "React", status: TaskStatuses.New, todoListId: "todolistId1", description: '',
                 startDate: '', deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low }
         ],
         "todolistId2": [
-            { id: "1", title: "bread", status: TaskStatuses.New, todolistId: "todolistId2", description: '',
+            { id: "1", title: "bread", status: TaskStatuses.New, todoListId: "todolistId2", description: '',
                 startDate: '', deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low },
-            { id: "2", title: "milk", status: TaskStatuses.Completed, todolistId: "todolistId2", description: '',
+            { id: "2", title: "milk", status: TaskStatuses.Completed, todoListId: "todolistId2", description: '',
                 startDate: '', deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low },
-            { id: "3", title: "tea", status: TaskStatuses.New, todolistId: "todolistId2", description: '',
+            { id: "3", title: "tea", status: TaskStatuses.New, todoListId: "todolistId2", description: '',
                 startDate: '', deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low }
         ]
     }
@@ -39,7 +39,8 @@ test('correct task should be deleted from correct array', () => {
 
 test('correct task should be added to correct array', () => {
 
-    const action = addTaskAC({todolistId: "todolistId2",
+    const action = addTaskAC({
+        todoListId: "todolistId2",
         title: "juice",
         status: TaskStatuses.New,
         addedDate: "",
