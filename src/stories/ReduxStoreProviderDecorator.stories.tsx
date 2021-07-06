@@ -7,9 +7,11 @@ import {TaskPriorities, TaskStatuses } from '../api/todolists-api'
 import { tasksReducer } from '../features/todolists/tasks/tasks-reducer';
 import { todolistReducer } from '../features/todolists/todolist-reducer';
 import { AppRootStateType } from '../app/store';
+import { appReducer } from '../app/app-reducer';
 const rootReducer = combineReducers({
     tasks: tasksReducer,
-    todoLists: todolistReducer
+    todoLists: todolistReducer,
+    app: appReducer
 })
 
 const initialGlobalState: AppRootStateType = {
@@ -30,6 +32,10 @@ const initialGlobalState: AppRootStateType = {
             {id: v1(), title: "React Book", status: TaskStatuses.Completed, todoListId: "todolistId2", description: '',
                 startDate: '', deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low}
         ]
+    },
+    app:{
+        status: 'idle',
+        error: null
     }
 };
 export const storyBookStore = createStore(rootReducer, initialGlobalState);

@@ -57,8 +57,6 @@ export const Todolist = React.memo((props: PropsType) => {
     const changeFilterCompleted = useCallback(() => 
         props.changeFilter(props.todolistId, "completed"),[props.todolistId, props.changeFilter])
 
-    console.log('props.tasks ===> ',props.tasks)
-    console.log('tasksForTodolist ===> ',tasksForTodolist)
     return <div>
         <div style={{display: "flex", justifyContent: "flex-end"}}>
             <Button

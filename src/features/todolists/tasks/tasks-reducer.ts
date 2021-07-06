@@ -58,7 +58,7 @@ export const setTasksAC = (todolistId: string, tasks: Array<TaskType>) => {
 export const fetchTasksTC = (todolistId: string) => (dispatch: Dispatch) => {
     todolistsAPI.getTasks(todolistId).then(res => {
         const tasks = res.data.items
-        console.log('res.data', res.data)
+
         const action = setTasksAC(todolistId, tasks)
         dispatch(action)
     })
@@ -71,7 +71,7 @@ export const removeTaskTC = (todolistId: string, taskId: string) => (dispatch: D
 export const addTaskTC = (title: string, todolistId: string) => (dispatch: Dispatch) => {
     todolistsAPI.createTask(title, todolistId).then(res => {
         const task = res.data.data.item
-        console.log("+++" + res.data.data.item)
+
         dispatch(addTaskAC(task))
     })
 }

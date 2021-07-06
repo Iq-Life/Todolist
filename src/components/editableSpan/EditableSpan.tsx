@@ -26,10 +26,7 @@ export const EditableSpan= React.memo((props: EditableSpanType) => {
 
     const onKeyPress = useCallback(({charCode}: KeyboardEvent<HTMLInputElement>) => {
         if (charCode === 13) {
-            if (title.trim()) {
-                props.changeTitle(title.trim())
-            }
-            setEditMode(false)
+            offEditMode()
         }
     }, [props, title])
 
