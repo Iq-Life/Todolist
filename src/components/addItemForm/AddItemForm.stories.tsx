@@ -15,3 +15,8 @@ export default {
 export const AddItemFormBaseExample = (props:any) => {
     return <AddItemForm addItem={()=> console.log("Button 'add' was pressed inside the from")}/>
 }
+export const AddItemFormDisabledExample = (props:any) => {
+    return <AddItemForm
+        disabled={true}
+        addItem={()=> console.log("Button 'add' was pressed inside the from")}/>
+}

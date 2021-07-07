@@ -1,6 +1,7 @@
 import React from 'react'
 import {Provider} from 'react-redux'
-import {combineReducers, createStore} from 'redux'
+import {applyMiddleware, combineReducers, createStore} from 'redux'
+import thunkMiddleware from "redux-thunk";
 import {v1} from 'uuid'
 import '@storybook/addon-console';
 import {TaskPriorities, TaskStatuses } from '../api/todolists-api'
@@ -16,8 +17,8 @@ const rootReducer = combineReducers({
 
 const initialGlobalState: AppRootStateType = {
     todolists: [
-        {id: "todoListId1", title: "Film", filter: "all", addedDate: '', order: 0},
-        {id: "todoListId2", title: "Music", filter: "all", addedDate: '', order: 0}
+        {id: "todoListId1", title: "Film", filter: "all", entityStatus: 'idle', addedDate: '', order: 0},
+        {id: "todoListId2", title: "Music", filter: "all", entityStatus: 'idle', addedDate: '', order: 0}
     ] ,
     tasks: {
         ["todolistId1"]: [
@@ -38,7 +39,7 @@ const initialGlobalState: AppRootStateType = {
         error: null
     }
 };
-export const storyBookStore = createStore(rootReducer, initialGlobalState);
+export const storyBookStore = createStore(rootReducer, initialGlobalState,applyMiddleware(thunkMiddleware));
 export const ReduxStoreProviderDecorator = (storyFn: any) => (
     <Provider
         store={storyBookStore}>{storyFn()}

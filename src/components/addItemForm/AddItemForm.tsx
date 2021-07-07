@@ -4,37 +4,39 @@ import AddBoxTwoToneIcon from '@material-ui/icons/AddBoxTwoTone';
 
 type AddItemFormType = {
     addItem: (title: string) => void
+    disabled?: boolean
 }
 
-export const AddItemForm = React.memo ((props: AddItemFormType) => {
+export const AddItemForm = React.memo(({addItem, disabled = false}: AddItemFormType) => {
 
     let [title, setTitle] = useState<string>("")
     let [error, setError] = useState<string | null>(null)
 
     const addTask = useCallback(() => {
         if (title.trim() !== "") {
-            props.addItem(title.trim())
+            addItem(title.trim())
             setTitle("")
         } else {
             setError("Title is required")
         }
-    },[props, title])
+    }, [addItem, title])
 
     const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
-    },[])
+    }, [setTitle])
 
     const onKeyPress = useCallback(({charCode}: KeyboardEvent<HTMLInputElement>) => {
-        if (error !== null){
+        if (error !== null) {
             setError(null)
         }
         if (charCode === 13) {
             addTask()
         }
-    },[addTask, error])
+    }, [addTask, error])
 
     return <div>
         <TextField
+            disabled={disabled}
             color={"primary"}
             label={"Type value"}
             error={!!error}
@@ -43,8 +45,12 @@ export const AddItemForm = React.memo ((props: AddItemFormType) => {
             onChange={onChange}
             onKeyPress={onKeyPress}
         />
-        <IconButton color="primary" size="small"
-                style={{marginLeft: "13px", marginTop:"16px"}} onClick={addTask}>
+        <IconButton color="primary"
+                    size="small"
+                    style={{marginLeft: "13px", marginTop: "16px"}}
+                    onClick={addTask}
+                    disabled={disabled}
+        >
             <AddBoxTwoToneIcon/>
         </IconButton>
     </div>

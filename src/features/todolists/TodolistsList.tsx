@@ -3,40 +3,43 @@ import {Todolist} from "./Todolist";
 import {AddItemForm} from "../../components/addItemForm/AddItemForm";
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@material-ui/core";
 import {Menu} from "@material-ui/icons";
-import {addTodolistAC, changeTodolistFilterAC,
+import {
+    addTodolistAC, changeTodolistFilterAC,
     changeTodolistTitleAC, fetchTodolistsTC, FilterValueType, removeTodolistAC, TodolistDomainType
 } from "./todolist-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {TaskStatuses} from '../../api/todolists-api';
-import {addTaskTC, removeTaskTC, TasksStateType, updateTaskTC } from './tasks/tasks-reducer';
-import { AppRootStateType } from '../../app/store';
-import {addTodolistTC, changeTodolistTitleTC, removeTodolistTC } from './todolist-reducer';
+import {addTaskTC, removeTaskTC, TasksStateType, updateTaskTC} from './tasks/tasks-reducer';
+import {AppRootStateType} from '../../app/store';
+import {addTodolistTC, changeTodolistTitleTC, removeTodolistTC} from './todolist-reducer';
 
-export const TodolistsList: React.FC = () => {
+export const TodolistsList: React.FC<TodoListsListType> = ({demo = false}) => {
 
     const dispatch = useDispatch()
     const todolists = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todolists)
     const tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
 
     useEffect(() => {
+        if(!demo){
         dispatch(fetchTodolistsTC())
+        }
     }, [])
 
     const removeTask = useCallback(function (todolistId: string, id: string) {
         const thunk = removeTaskTC(todolistId, id)
         dispatch(thunk)
-    }, [])
-    const addTask = useCallback((todolistId: string, title: string)=>{
-        dispatch (addTaskTC(todolistId, title))
-    }, [])
+    }, [dispatch])
+    const addTask = useCallback((todolistId: string, title: string) => {
+        dispatch(addTaskTC(todolistId, title))
+    }, [dispatch])
     const changeTaskStatus = useCallback((todolistId: string, id: string, status: TaskStatuses) => {
         const thunk = updateTaskTC(todolistId, id, {status})
         dispatch(thunk)
-    }, [])
+    }, [dispatch])
     const changeTaskTitle = useCallback((todolistId: string, id: string, newTitle: string) => {
         const thunk = updateTaskTC(todolistId, id, {title: newTitle})
         dispatch(thunk)
-    }, [])
+    }, [dispatch])
 
     const removeTodolist = useCallback((todolistId: string) => {
         dispatch(removeTodolistTC(todolistId))
@@ -47,12 +50,10 @@ export const TodolistsList: React.FC = () => {
     const changeTodolistTitle = useCallback((todolistId: string, title: string) => {
         dispatch(changeTodolistTitleTC(todolistId, title))
     }, [dispatch])
-    
+
     const changeFilter = useCallback((todolistId: string, value: FilterValueType) => {
         dispatch(changeTodolistFilterAC(todolistId, value))
     }, [dispatch])
-
-    console.log('tasks', tasks)
 
     return <>
         <Grid container style={{padding: "15px"}}>
@@ -70,9 +71,7 @@ export const TodolistsList: React.FC = () => {
                         <Grid item spacing={4} style={{margin: "15px"}}>
                             <Paper elevation={5} style={{padding: "15px", display: "flex"}}>
                                 <Todolist
-                                    todolistId={tl.id}
-                                    title={tl.title}
-                                    filter={tl.filter}
+                                    todolist={tl}
                                     tasks={allTodolistTasks}
                                     removeTask={removeTask}
                                     addTask={addTask}
@@ -81,6 +80,7 @@ export const TodolistsList: React.FC = () => {
                                     removeTodolist={removeTodolist}
                                     changeTodolistTitle={changeTodolistTitle}
                                     changeFilter={changeFilter}
+                                    demo={demo}
                                 />
                             </Paper>
                         </Grid>
@@ -90,3 +90,6 @@ export const TodolistsList: React.FC = () => {
         </Grid>
     </>
 }
+
+//type
+type TodoListsListType = { demo?: boolean }
