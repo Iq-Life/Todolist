@@ -62,6 +62,7 @@ export type TaskType = {
     todoListId: string
     order: number
     addedDate: string
+
 }
 type ResponseType< D= {}> = {
     resultCode: number

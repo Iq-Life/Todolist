@@ -74,7 +74,8 @@ export const Todolist = React.memo(({demo = false, ...props}: PropsType) => {
             display: "flex", justifyContent: "center", marginTop: "0",
             fontFamily: "Bradley Hand, cursive", marginBottom: "5px"
         }}>
-            <EditableSpan title={props.todolist.title} changeTitle={changeTodolistTitle}/>
+            <EditableSpan title={props.todolist.title} changeTitle={changeTodolistTitle}
+                          disabled={props.todolist.entityStatus === 'loading'}/>
         </h2>
 
         <AddItemForm addItem={addTask} disabled={props.todolist.entityStatus === 'loading'}/>
