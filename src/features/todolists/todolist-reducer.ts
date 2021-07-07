@@ -2,6 +2,7 @@ import {Dispatch} from "redux";
 import {v1} from "uuid";
 import {todolistsAPI, TodolistType} from "../../api/todolists-api";
 import { setStatusAC, SetErrorOrStatusType, RequestStatusType } from "../../app/app-reducer";
+import { handleServerNetworkError } from "../../utils/error-utils";
 
 
 const initialState: Array<TodolistDomainType> = []
@@ -59,6 +60,9 @@ export const fetchTodolistsTC = () => {
             dispatch(setTodolistsAC(res.data))
             dispatch(setStatusAC('succeeded'))
         })
+            .catch((error) => {
+                handleServerNetworkError(error, dispatch)
+            })
     }
 }
 export const removeTodolistTC = (todolistId: string) => {
@@ -69,6 +73,9 @@ export const removeTodolistTC = (todolistId: string) => {
             dispatch(removeTodolistAC(todolistId))
             dispatch(setStatusAC('succeeded'))
         })
+            .catch((error) => {
+                handleServerNetworkError(error, dispatch)
+            })
     }
 }
 export const addTodolistTC = (title: string) => {
@@ -79,6 +86,9 @@ export const addTodolistTC = (title: string) => {
             dispatch(addTodolistAC(newTodolist))
             dispatch(setStatusAC('succeeded'))
         })
+            .catch((error) => {
+                handleServerNetworkError(error, dispatch)
+            })
     }
 }
 export const changeTodolistTitleTC = (id: string, title: string) => {
@@ -86,6 +96,9 @@ export const changeTodolistTitleTC = (id: string, title: string) => {
         todolistsAPI.updateTodolist(id, title).then((res) => {
             dispatch(changeTodolistTitleAC(id, title))
         })
+            .catch((error) => {
+                handleServerNetworkError(error, dispatch)
+            })
     }
 }
 export const updateTodolistTC = (id: string, title: string) => {
@@ -93,6 +106,9 @@ export const updateTodolistTC = (id: string, title: string) => {
         todolistsAPI.updateTodolist(id, title).then((res) => {
             dispatch(changeTodolistTitleAC(id, title))
         })
+            .catch((error) => {
+                handleServerNetworkError(error, dispatch)
+            })
     }
 }
 
