@@ -4,10 +4,12 @@ import {
     Button, Grid
 } from '@material-ui/core'
 import { useFormik } from 'formik'
+import { useDispatch } from 'react-redux';
+import { loginTC } from './login-reducer';
 
 
 export const Login = () => {
-
+    const dispatch = useDispatch()
     const formik = useFormik({
 
         initialValues: {
@@ -16,7 +18,8 @@ export const Login = () => {
             rememberMe: false
         },
         onSubmit: values => {
-            alert(JSON.stringify(values))
+            debugger
+            dispatch(loginTC(values))
         },
         validate: values => {
             if (!values.email) {

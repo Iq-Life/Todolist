@@ -15,25 +15,25 @@ function App({ demo = false }: PropsType) {
     const status = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
     return (
         <BrowserRouter>
-        <div>
-            <ErrorSnackbar />
-            <AppBar position="static">
-                <Toolbar>
-                    <IconButton edge="start" color="inherit" aria-label="menu">
-                        <Menu></Menu>
-                    </IconButton>
-                    <Typography variant="h6">
-                        News
-                    </Typography>
-                    <Button color="inherit">Login</Button>
-                </Toolbar>
-                {status === 'loading' && <LinearProgress />}
-            </AppBar>
-            <Container fixed>
-                <Route exact path={"/"} render={()=><TodolistsList demo={demo}/>}/>
-                <Route path={"/login"} render={()=><Login />}/>
-            </Container>
-        </div>
+            <div>
+                <ErrorSnackbar />
+                <AppBar position="static">
+                    <Toolbar>
+                        <IconButton edge="start" color="inherit" aria-label="menu">
+                            <Menu></Menu>
+                        </IconButton>
+                        <Typography variant="h6">
+                            News
+                        </Typography>
+                        <Button color="inherit">Login</Button>
+                    </Toolbar>
+                    {status === 'loading' && <LinearProgress />}
+                </AppBar>
+                <Container fixed>
+                    <Route exact path={"/"} render={() => <TodolistsList demo={demo} />} />
+                    <Route path={"/login"} render={() => <Login />} />
+                </Container>
+            </div>
         </BrowserRouter>
     );
 }
