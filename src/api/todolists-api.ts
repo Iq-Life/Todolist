@@ -53,7 +53,7 @@ export const todolistsAPI = {
 };
 export const authAPI = {
     authorizing(data: loginParamsType) {
-        return instance.put<ResponseType<{ userId?: number }>>(`auth/login`, data);
+        return instance.post<ResponseType<{ userId?: number }>>(`auth/login`, data);
     },
 };
 //types

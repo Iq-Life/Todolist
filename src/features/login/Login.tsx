@@ -18,7 +18,6 @@ export const Login = () => {
             rememberMe: false
         },
         onSubmit: values => {
-            debugger
             dispatch(loginTC(values))
         },
         validate: values => {
