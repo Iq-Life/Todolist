@@ -4,14 +4,17 @@ import {
     Button, Grid
 } from '@material-ui/core'
 import { useFormik } from 'formik'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loginTC } from './login-reducer';
+import { AppRootStateType } from '../../app/store';
+import { Redirect } from 'react-router-dom';
 
 
 export const Login = () => {
     const dispatch = useDispatch()
-    const formik = useFormik({
+    const isLoggedIn = useSelector<AppRootStateType, boolean>(state=> state.auth.isLoggedIn)
 
+    const formik = useFormik({
         initialValues: {
             email: '',
             password: '',
@@ -32,8 +35,10 @@ export const Login = () => {
         }
     })
 
-
-
+    if (isLoggedIn){
+        return <Redirect to={"/"}/>
+    }
+    
     return <Grid container justify="center">
         <Grid item xs={4}>
             <form onSubmit={formik.handleSubmit}>

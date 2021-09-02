@@ -20,22 +20,20 @@ export const authReducer = (state: initialStateType = initialState, action: Acti
 export const setIsLoggedInAC = (value: boolean) => {
     return { type: "login/SET-IS-LOGGEDIN", value } as const;
 }
-
 //thuks
 export const loginTC = (data: loginParamsType) => {
     return (dispatch: Dispatch<ThunkDispatchType>) => {
         dispatch(setStatusAC("loading"))
         authAPI.authorizing(data).then(res => {
             if (res.data.resultCode === 0) {
-                /* dispatch(setIsLoggedInAC(true)); */
-                alert("yo!")
-                dispatch(setStatusAC("succeeded"));
+                 dispatch(setIsLoggedInAC(true))
+                dispatch(setStatusAC("succeeded"))
             } else {
-                handleServerAppError(res.data, dispatch);
+                handleServerAppError(res.data, dispatch)
             }
         })
             .catch((error) => {
-                handleServerNetworkError(error, dispatch);
+                handleServerNetworkError(error, dispatch)
             })
     }
 }
