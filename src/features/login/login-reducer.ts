@@ -26,7 +26,7 @@ export const loginTC = (data: loginParamsType) => {
         dispatch(setStatusAC("loading"))
         authAPI.authorizing(data).then(res => {
             if (res.data.resultCode === 0) {
-                 dispatch(setIsLoggedInAC(true))
+                dispatch(setIsLoggedInAC(true))
                 dispatch(setStatusAC("succeeded"))
             } else {
                 handleServerAppError(res.data, dispatch)

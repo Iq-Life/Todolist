@@ -55,6 +55,9 @@ export const authAPI = {
     authorizing(data: loginParamsType) {
         return instance.post<ResponseType<{ userId?: number }>>(`auth/login`, data);
     },
+    me() {
+        return instance.get<ResponseType<{id:number, email:string, login:string}>>('auth/me')
+    }
 };
 //types
 export type TodolistType = {
