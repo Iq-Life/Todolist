@@ -12,16 +12,23 @@ import { Login } from '../features/login/Login';
 import { BrowserRouter, Redirect, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
+import { logoutTC } from '../features/login/login-reducer';
+import { useCallback } from 'react';
 
 
 function App({ demo = false }: PropsType) {
     const status = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
     const isInitialized = useSelector<AppRootStateType, boolean>((state) => state.app.isInitialized)
+    const isLoggedIn = useSelector<AppRootStateType, boolean>(state=> state.auth.isLoggedIn)
     const dispatch = useDispatch()
 
     useEffect(()=>{
         dispatch(initializeAppTC())
     }, [])
+
+    const logOutHandler = useCallback(() => {
+        dispatch(logoutTC())
+    },[])
 
     if (!isInitialized) {
         return <div 
@@ -30,9 +37,6 @@ function App({ demo = false }: PropsType) {
             </div>
     }
 
-    const loginClick = () => {
-        return <Redirect to={"/login"} />
-    }
     return (
         <BrowserRouter>
             <div>
@@ -45,7 +49,7 @@ function App({ demo = false }: PropsType) {
                         <Typography variant="h6">
                             News
                         </Typography>
-                        <Button color="inherit" onClick={loginClick}>Login</Button>
+                        {isLoggedIn && <Button color="inherit" onClick={logOutHandler}>Log out</Button>}
                     </Toolbar>
                     {status === 'loading' && <LinearProgress />}
                 </AppBar>

@@ -12,16 +12,19 @@ import {TaskStatuses} from '../../api/todolists-api';
 import {addTaskTC, removeTaskTC, TasksStateType, updateTaskTC} from './tasks/tasks-reducer';
 import {AppRootStateType} from '../../app/store';
 import {addTodolistTC, changeTodolistTitleTC, removeTodolistTC} from './todolist-reducer';
+import { Redirect } from 'react-router';
 
 export const TodolistsList: React.FC<TodoListsListType> = ({demo = false}) => {
 
     const dispatch = useDispatch()
     const todolists = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todolists)
     const tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
+    const isLoggedIn = useSelector<AppRootStateType, boolean>(state=> state.auth.isLoggedIn)
+
     
 
     useEffect(() => {
-        if(!demo){
+        if(!demo || !isLoggedIn){
         dispatch(fetchTodolistsTC())
         }
     }, [])
@@ -55,6 +58,10 @@ export const TodolistsList: React.FC<TodoListsListType> = ({demo = false}) => {
     const changeFilter = useCallback((todolistId: string, value: FilterValueType) => {
         dispatch(changeTodolistFilterAC(todolistId, value))
     }, [dispatch])
+
+    if(!isLoggedIn){
+        return <Redirect to={"/login"} />
+    }
 
     return <>
         <Grid container style={{padding: "15px"}}>
