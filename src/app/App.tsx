@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 import { AppRootStateType } from './store';
 import { initializeAppTC, RequestStatusType } from './app-reducer';
 import { Login } from '../features/login/Login';
-import { BrowserRouter, Redirect, Route } from 'react-router-dom';
+import { HashRouter, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { logoutTC } from '../features/login/login-reducer';
@@ -36,9 +36,9 @@ function App({ demo = false }: PropsType) {
             <CircularProgress />
             </div>
     }
-
+ 
     return (
-        <BrowserRouter>
+        <HashRouter>
             <div>
                 <ErrorSnackbar />
                 <AppBar position="static">
@@ -58,7 +58,7 @@ function App({ demo = false }: PropsType) {
                     <Route path={"/login"} render={() => <Login />} />
                 </Container>
             </div>
-        </BrowserRouter>
+        </HashRouter>
     );
 }
 
