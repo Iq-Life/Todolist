@@ -1,22 +1,21 @@
-import React from "react";
-import { AddItemForm } from "./AddItemForm";
+import React from 'react'
+import {action} from '@storybook/addon-actions'
+import {AddItemForm} from './AddItemForm'
 
-import {ReduxStoreProviderDecorator} from "../../stories/ReduxStoreProviderDecorator.stories";
-import '@storybook/addon-console';
 export default {
-    title: "AddItemForm Component",
-    component: AddItemForm,
-    decorators: [ReduxStoreProviderDecorator],
-    argTypes: { addItem: { callback: "Button 'add' was pressed inside the from" } }
+    title: 'AddItemForm Stories',
+    component: AddItemForm
 }
 
-//const callback = action("Button 'add' was pressed inside the from")
-
-export const AddItemFormBaseExample = (props:any) => {
-    return <AddItemForm addItem={()=> console.log("Button 'add' was pressed inside the from")}/>
+export const AddItemFormBaseExample = (props: any) => {
+    return (<AddItemForm
+        addItem={action('Button inside form clicked')}
+    />)
 }
-export const AddItemFormDisabledExample = (props:any) => {
-    return <AddItemForm
-        disabled={true}
-        addItem={()=> console.log("Button 'add' was pressed inside the from")}/>
+
+
+export const AddItemFormDisabledExample = (props: any) => {
+    return (<AddItemForm disabled={true}
+        addItem={action('Button inside form clicked')}
+    />)
 }

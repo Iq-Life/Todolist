@@ -1,17 +1,12 @@
-import React from "react";
-import {EditableSpan} from "./EditableSpan";
-import {ReduxStoreProviderDecorator} from "../../stories/ReduxStoreProviderDecorator.stories";
-import '@storybook/addon-console';
+import React from 'react'
+import {action} from '@storybook/addon-actions'
+import {EditableSpan} from './EditableSpan'
+
 export default {
-    title: "EditableSpan Component",
-    component: EditableSpan,
-    decorators: [ReduxStoreProviderDecorator]
+    title: 'EditableSpan Stories',
+    component: EditableSpan
 }
 
-//const changeTitleCallback = action("Value changed")
-
-export const EditableSpanBaseExample = () => {
-    return <>
-<EditableSpan title={"Start value"} changeTitle={()=> console.log("Value changed")} />
-    </>
+export const EditableSpanFormBaseExample = (props: any) => {
+    return (<EditableSpan value={"StartValue"} onChange={action("value changed")} />)
 }

@@ -1,24 +1,24 @@
 import React from 'react'
 import {Provider} from 'react-redux'
 import {applyMiddleware, combineReducers, createStore} from 'redux'
-import thunkMiddleware from "redux-thunk";
+import {tasksReducer} from '../../features/TodolistsList/tasks-reducer'
+import {todolistsReducer} from '../../features/TodolistsList/todolists-reducer'
 import {v1} from 'uuid'
-import '@storybook/addon-console';
-import {TaskPriorities, TaskStatuses } from '../api/todolists-api'
-import { tasksReducer } from '../features/todolists/tasks/tasks-reducer';
-import { todolistReducer } from '../features/todolists/todolist-reducer';
-import { AppRootStateType } from '../app/store';
-import { appReducer } from '../app/app-reducer';
+import {AppRootStateType} from '../../app/store'
+import {TaskPriorities, TaskStatuses} from '../../api/todolists-api'
+import {appReducer} from '../../app/app-reducer'
+import thunkMiddleware from 'redux-thunk'
+
 const rootReducer = combineReducers({
     tasks: tasksReducer,
-    todoLists: todolistReducer,
+    todolists: todolistsReducer,
     app: appReducer
 })
 
 const initialGlobalState: AppRootStateType = {
     todolists: [
-        {id: "todoListId1", title: "Film", filter: "all", entityStatus: 'idle', addedDate: '', order: 0},
-        {id: "todoListId2", title: "Music", filter: "all", entityStatus: 'idle', addedDate: '', order: 0}
+        {id: "todolistId1", title: "What to learn", filter: "all", entityStatus: 'idle', addedDate: '', order: 0},
+        {id: "todolistId2", title: "What to buy", filter: "all", entityStatus: 'loading', addedDate: '', order: 0}
     ] ,
     tasks: {
         ["todolistId1"]: [
@@ -34,16 +34,18 @@ const initialGlobalState: AppRootStateType = {
                 startDate: '', deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low}
         ]
     },
-    app:{
-        status: 'idle',
+    app: {
         error: null,
+        status: 'idle',
         isInitialized: false
     },
-    auth:{
-        isLoggedIn:false
+    auth: {
+        isLoggedIn: false
     }
 };
-export const storyBookStore = createStore(rootReducer, initialGlobalState,applyMiddleware(thunkMiddleware));
+
+export const storyBookStore = createStore(rootReducer, initialGlobalState, applyMiddleware(thunkMiddleware));
+
 export const ReduxStoreProviderDecorator = (storyFn: any) => (
     <Provider
         store={storyBookStore}>{storyFn()}
