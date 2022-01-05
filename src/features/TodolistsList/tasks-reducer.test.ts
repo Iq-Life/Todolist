@@ -46,8 +46,7 @@ test('correct task should be deleted from correct array', () => {
     expect(endState["todolistId2"].every(t => t.id != "2")).toBeTruthy();
 });
 test('correct task should be added to correct array', () => {
-    //const action = addTaskAC("juce", "todolistId2");
-    const action = addTaskAC({
+    const task = {
         task: {
             todoListId: "todolistId2",
             title: "juce",
@@ -60,7 +59,8 @@ test('correct task should be added to correct array', () => {
             startDate: "",
             id: "id exists"
         }
-    });
+    }
+    const action = addTaskAC(task);
 
     const endState = tasksReducer(startState, action)
 

@@ -1,13 +1,14 @@
-import React, {useCallback, useEffect} from 'react'
-import {AddItemForm} from '../../../components/AddItemForm/AddItemForm'
-import {EditableSpan} from '../../../components/EditableSpan/EditableSpan'
-import {Button, IconButton} from '@material-ui/core'
-import {Delete} from '@material-ui/icons'
-import {Task} from './Task/Task'
-import {TaskStatuses, TaskType} from '../../../api/todolists-api'
-import {FilterValuesType, TodolistDomainType} from '../todolists-reducer'
-import {useDispatch} from 'react-redux'
-import {fetchTasksTC} from '../tasks-reducer'
+import React, { useCallback, useEffect } from 'react'
+import style from './Todolist.module.css'
+import { AddItemForm } from '../../../components/AddItemForm/AddItemForm'
+import { EditableSpan } from '../../../components/EditableSpan/EditableSpan'
+import { Button, IconButton } from '@material-ui/core'
+import { Delete } from '@material-ui/icons'
+import { Task } from './Task/Task'
+import { TaskStatuses, TaskType } from '../../../api/todolists-api'
+import { FilterValuesType, TodolistDomainType } from '../todolists-reducer'
+import { useDispatch } from 'react-redux'
+import { fetchTasksTC } from '../tasks-reducer'
 
 type PropsType = {
     todolist: TodolistDomainType
@@ -22,7 +23,7 @@ type PropsType = {
     demo?: boolean
 }
 
-export const Todolist = React.memo(function ({demo = false, ...props}: PropsType) {
+export const Todolist = React.memo(function ({ demo = false, ...props }: PropsType) {
 
     const dispatch = useDispatch()
     useEffect(() => {
@@ -58,34 +59,36 @@ export const Todolist = React.memo(function ({demo = false, ...props}: PropsType
     }
 
     return <div>
-        <h3><EditableSpan value={props.todolist.title} onChange={changeTodolistTitle}/>
+        <h3 className={style.elemToCenter}><EditableSpan value={props.todolist.title} onChange={changeTodolistTitle} />
             <IconButton onClick={removeTodolist} disabled={props.todolist.entityStatus === 'loading'}>
-                <Delete/>
+                <Delete />
             </IconButton>
         </h3>
-        <AddItemForm addItem={addTask} disabled={props.todolist.entityStatus === 'loading'}/>
+        <div className={style.elemToCenter}>
+            <AddItemForm addItem={addTask} disabled={props.todolist.entityStatus === 'loading'} />
+        </div>
         <div>
             {
                 tasksForTodolist.map(t => <Task key={t.id} task={t} todolistId={props.todolist.id}
-                                                removeTask={props.removeTask}
-                                                changeTaskTitle={props.changeTaskTitle}
-                                                changeTaskStatus={props.changeTaskStatus}
+                    removeTask={props.removeTask}
+                    changeTaskTitle={props.changeTaskTitle}
+                    changeTaskStatus={props.changeTaskStatus}
                 />)
             }
         </div>
-        <div style={{paddingTop: '10px'}}>
+        <div className={style.buttonBar}>
             <Button variant={props.todolist.filter === 'all' ? 'outlined' : 'text'}
-                    onClick={onAllClickHandler}
-                    color={'default'}
+                onClick={onAllClickHandler}
+                color={'default'}
             >All
             </Button>
             <Button variant={props.todolist.filter === 'active' ? 'outlined' : 'text'}
-                    onClick={onActiveClickHandler}
-                    color={'primary'}>Active
+                onClick={onActiveClickHandler}
+                color={'primary'}>Active
             </Button>
             <Button variant={props.todolist.filter === 'completed' ? 'outlined' : 'text'}
-                    onClick={onCompletedClickHandler}
-                    color={'secondary'}>Completed
+                onClick={onCompletedClickHandler}
+                color={'secondary'}>Completed
             </Button>
         </div>
     </div>
